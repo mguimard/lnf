@@ -5,7 +5,9 @@ interface Card {
   matched: boolean;
 }
 
-const grid: Card[] = [];
+type Grid = Card[];
+
+const grid: Grid = [];
 const logos = ["🚕", "🥝", "🐼", "🎯", "🐱", "🚀", "🎁", "🍎"];
 
 for (let i = 0; i < logos.length; i++) {

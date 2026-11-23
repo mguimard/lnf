@@ -1,0 +1,13 @@
+<p>Hello angular {{ title }}</p>
+
+<button (click)="title += 'coucou'">update title</button>
+
+<hr />
+
+<input type="checkbox" (change)="showCounter = !showCounter" />
+@if(showCounter){
+<app-counter></app-counter>
+}
+<hr />
+<app-products></app-products>
+<app-shopping-cart></app-shopping-cart>

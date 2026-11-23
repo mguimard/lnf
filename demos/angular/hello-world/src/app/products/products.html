@@ -1,0 +1,5 @@
+<p>Liste des produits</p>
+
+@for(p of products; track $index){
+<app-product-item [p]="p"></app-product-item>
+}

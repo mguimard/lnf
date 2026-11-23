@@ -1,0 +1,9 @@
+app-products {
+  border: 1px solid green;
+  display: block;
+  margin: 5px;
+}
+app-shopping-cart {
+  border: 1px solid orange;
+  display: block;
+}
