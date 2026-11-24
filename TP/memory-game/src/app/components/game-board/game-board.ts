@@ -1,13 +1,15 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { BorderColor } from '../../directives/border-color';
 import { Card } from '../../models/card';
 import { Score } from '../../models/score';
+import { DurationHumanReadablePipe } from '../../pipes/duration-human-readable-pipe';
 import { ScoresService } from '../../services/scores-service';
 import { CardItem } from '../card-item/card-item';
 
 const delay = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 @Component({
-  imports: [CardItem],
+  imports: [CardItem, BorderColor, DurationHumanReadablePipe],
   selector: 'app-game-board',
   styleUrl: './game-board.css',
   templateUrl: './game-board.html',
@@ -20,6 +22,7 @@ export class GameBoard implements OnInit {
   time = signal(0);
   counterId: number = 0;
   gameOver = signal(false);
+  borderColor = 'orange';
 
   ngOnInit(): void {
     this.initGrid();

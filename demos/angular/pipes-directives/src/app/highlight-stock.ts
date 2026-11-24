@@ -1,4 +1,5 @@
-import { Directive, ElementRef, inject, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, inject, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { AddToCartButton } from './add-to-cart-button/add-to-cart-button';
 
 @Directive({
   selector: '[appHighlightStock]',
@@ -8,6 +9,7 @@ export class HighlightStock implements OnInit {
   inStock: boolean = false;
 
   el = inject(ElementRef);
+  vcr = inject(ViewContainerRef);
 
   ngOnInit(): void {
     console.log('stock : ', this.inStock);
@@ -17,8 +19,10 @@ export class HighlightStock implements OnInit {
       button.innerText = 'Add to cart';
       this.el.nativeElement.append(button);
     }
+
     // a investiguer
-    let d = document.createElement('app-dumb-component');
-    this.el.nativeElement.append(d);
+    //let template = '<app-add-to-cart-button></app-add-to-cart-button>'
+    this.vcr.createComponent(AddToCartButton);
+    // this.el.nativeElement.append(comp.instance);
   }
 }

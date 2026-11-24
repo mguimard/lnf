@@ -1,18 +1,18 @@
-<p>Temps écoulé : {{ time() }} secondes</p>
+<p>Temps écoulé : {{ (1000*time()) | durationHumanReadable}}</p>
 
 <p>Scores</p>
 <ul>
     @for (score of scores(); track $index) {
-    <li>{{score.timestamp}} - {{score.name}} : {{ score.duration_ms}} ms</li>
+    <li>{{score.timestamp}} - {{score.name}} : {{ score.duration_ms | durationHumanReadable }}</li>
     }
 
 </ul>
 
-<p>Grille</p>
+<p [style.color]="borderColor">Grille</p>
 
 <div>
     @for (card of grid(); track $index) {
-    <app-card-item [card]="card" (click)="reveal(card)"></app-card-item>
+    <app-card-item [appBorderColor]="borderColor" [card]="card" (click)="reveal(card)"></app-card-item>
     }
 </div>
 
