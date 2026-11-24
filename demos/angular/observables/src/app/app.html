@@ -1,0 +1,15 @@
+<p>Hello observables</p>
+
+<p>Counter: {{ service.obs$ | async }}</p>
+<p>Promesse: {{ service.prom$ | async }}</p>
+
+<p>Subject: {{ service.tuyau$ | async }}</p>
+<button (click)="service.resetTuyau()">Reset</button>
+
+<button (click)="load()">Load</button>
+
+@if(error()){
+{{ error()}}
+} @else {
+{{ data() }}
+}

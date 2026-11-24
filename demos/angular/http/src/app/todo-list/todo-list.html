@@ -1,0 +1,11 @@
+<button (click)="get404()">404</button>
+
+<hr />
+
+<p>Il y a {{ todos().length }} choses à faire</p>
+<button (click)="load()">Load</button>
+<ul>
+    @for (todo of todos(); track todo.id) {
+    <li>{{ todo.title }} </li>
+    }
+</ul>
