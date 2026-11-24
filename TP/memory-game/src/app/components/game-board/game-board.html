@@ -1,12 +1,19 @@
 <p>Temps écoulé : {{ time() }} secondes</p>
 
+<p>Scores</p>
+<ul>
+    @for (score of scores(); track $index) {
+    <li>{{score.timestamp}} - {{score.name}} : {{ score.duration_ms}} ms</li>
+    }
+
+</ul>
+
 <p>Grille</p>
 
 <div>
     @for (card of grid(); track $index) {
     <app-card-item [card]="card" (click)="reveal(card)"></app-card-item>
     }
-
 </div>
 
 @if(this.gameOver()){
@@ -14,3 +21,4 @@
 }
 
 <button (click)="restart()">Restart</button>
+<button (click)="cheat()">Auto solve</button>

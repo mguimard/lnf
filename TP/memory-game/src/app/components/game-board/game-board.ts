@@ -1,5 +1,7 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { Card } from '../../card';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { Card } from '../../models/card';
+import { Score } from '../../models/score';
+import { ScoresService } from '../../services/scores-service';
 import { CardItem } from '../card-item/card-item';
 
 const delay = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -11,6 +13,9 @@ const delay = async (ms: number) => new Promise((resolve) => setTimeout(resolve,
   templateUrl: './game-board.html',
 })
 export class GameBoard implements OnInit {
+  scoresService = inject(ScoresService);
+
+  scores = signal<Score[]>([]);
   grid = signal<Card[]>([]);
   time = signal(0);
   counterId: number = 0;
@@ -19,6 +24,7 @@ export class GameBoard implements OnInit {
   ngOnInit(): void {
     this.initGrid();
     this.initCounter();
+    this.loadScores();
   }
 
   private initGrid() {
@@ -57,6 +63,11 @@ export class GameBoard implements OnInit {
     this.counterId = setInterval(() => {
       this.time.set(this.time() + 1);
     }, 1000);
+  }
+
+  private async loadScores() {
+    let data = await this.scoresService.getScores();
+    this.scores.set(data);
   }
 
   async reveal(card: Card) {
@@ -99,6 +110,11 @@ export class GameBoard implements OnInit {
     }
   }
 
+  cheat() {
+    this.grid.set(this.grid().map((c) => ({ ...c, revealed: true, matched: true })));
+    this.stop();
+  }
+
   restart() {
     // reset grille + temps
     this.gameOver.set(false);
@@ -106,10 +122,19 @@ export class GameBoard implements OnInit {
     this.initCounter();
   }
 
-  stop() {
+  async stop() {
     this.gameOver.set(true);
+
     if (this.counterId) {
       clearInterval(this.counterId);
     }
+
+    await this.scoresService.addScore({
+      timestamp: new Date(),
+      duration_ms: this.time() * 1000,
+      name: 'Joe',
+    });
+
+    this.loadScores();
   }
 }
