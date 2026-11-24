@@ -1,0 +1,23 @@
+<p>Hello pipes et directives</p>
+
+<app-dumb-component app-dumb-component data="toto" appLog></app-dumb-component>
+
+<hr />
+
+@for (p of products; track $index) {
+<p appLog [appHighlightStock]="p.stock" nimportequoi ici pas de soucis>{{ p.name | titlecase }} : {{ p.price |
+    discount:0.2:500 | currency}}</p>
+}
+
+<hr />
+@for (f of fruits | sortArray; track $index) {
+<p>{{ f | uppercase | lowercase }}</p>
+}
+
+<hr />
+@for (f of fruits; track $index) {
+<p>{{ f | uppercase | lowercase }}</p>
+}
+
+<hr />
+<p>{{ 'une string' | testAsync}}</p>
