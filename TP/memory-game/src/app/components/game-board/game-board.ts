@@ -2,6 +2,8 @@ import { Component, OnInit, signal } from '@angular/core';
 import { Card } from '../../card';
 import { CardItem } from '../card-item/card-item';
 
+const delay = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 @Component({
   imports: [CardItem],
   selector: 'app-game-board',
@@ -12,6 +14,7 @@ export class GameBoard implements OnInit {
   grid = signal<Card[]>([]);
   time = signal(0);
   counterId: number = 0;
+  gameOver = signal(false);
 
   ngOnInit(): void {
     this.initGrid();
@@ -56,13 +59,57 @@ export class GameBoard implements OnInit {
     }, 1000);
   }
 
-  reveal(card: Card) {
+  async reveal(card: Card) {
+    // déja retournée
+    if (card.revealed) {
+      return;
+    }
+
+    const revealed = this.grid().filter((c) => c.revealed && !c.matched).length;
+
+    if (revealed >= 2) {
+      return;
+    }
+
+    if (revealed === 0) {
+      card.revealed = true;
+      return;
+    }
+
     card.revealed = true;
+
+    const revealedCards = this.grid().filter((c) => c.revealed && !c.matched);
+
+    if (revealedCards[0].logo === revealedCards[1].logo) {
+      revealedCards[0].matched = true;
+      revealedCards[1].matched = true;
+    } else {
+      await delay(1000);
+      revealedCards[0].revealed = false;
+      revealedCards[1].revealed = false;
+    }
+
+    // update the grid signal
+    this.grid.set(this.grid().map((c) => ({ ...c })));
+
+    let allRevealed = this.grid().every((card) => card.revealed);
+
+    if (allRevealed) {
+      this.stop();
+    }
   }
 
   restart() {
     // reset grille + temps
+    this.gameOver.set(false);
     this.initGrid();
     this.initCounter();
+  }
+
+  stop() {
+    this.gameOver.set(true);
+    if (this.counterId) {
+      clearInterval(this.counterId);
+    }
   }
 }

@@ -3,9 +3,14 @@
 <p>Grille</p>
 
 <div>
-    @for (item of grid(); track $index) {
-    <app-card-item [card]="item" (click)="reveal(item)"></app-card-item>
+    @for (card of grid(); track $index) {
+    <app-card-item [card]="card" (click)="reveal(card)"></app-card-item>
     }
+
 </div>
+
+@if(this.gameOver()){
+<p>Bravo !</p>
+}
 
 <button (click)="restart()">Restart</button>
