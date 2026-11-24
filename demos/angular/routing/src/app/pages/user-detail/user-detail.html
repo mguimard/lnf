@@ -1,0 +1,8 @@
+<p>user-detail works!</p>
+
+@if(user() == null) {
+<p>Please wait...</p>
+} @else {
+<p>Id: {{ userId() }}</p>
+<p>Name : {{ this.user()?.name }}</p>
+}
