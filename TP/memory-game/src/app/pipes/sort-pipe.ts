@@ -4,7 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'sort',
 })
 export class SortPipe implements PipeTransform {
-  transform<T>(value: T[], key: keyof T, order: 'asc' | 'desc'): T[] {
+  transform<T>(value: T[] | null, key: keyof T, order: 'asc' | 'desc'): T[] | null {
+    if (value === null) return null;
+
     let copy = [...value];
 
     copy.sort((a: T, b: T) => {
