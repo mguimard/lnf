@@ -10,6 +10,13 @@ npm install
 npx tsx main.ts
 ```
 
+# docker
+
+```bash
+docker build -t my-memory-server .
+docker run --rm -p 3001:3000 -d my-memory-server:latest
+```
+
 ## Routes
 
 ### Liste des meilleurs scores
@@ -24,7 +31,7 @@ Exemple curl
 
 ```bash
  curl localhost:3000/scores
- ```
+```
 
 ### Ajouter un score
 
@@ -48,4 +55,4 @@ Exemple curl
   -H'Content-Type: application/json' \
   -d '{"timestamp":"2026-03-16T12:00:00","name": "Alice", "duration_ms": 12345600 }' \
   -u alice:password
- ```
+```
