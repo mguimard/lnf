@@ -1,0 +1,11 @@
+<p>todo-item works!</p>
+
+@for(todo of service.todos(); track $index){
+<p appSetRedOnClick data-testid="todo">{{ todo.title | upper }}</p>
+}
+
+<button data-testid="add-todo" (click)="addTodo()">Add todo</button>
+
+<app-popup></app-popup>
+
+<input data-testid="my-input" type="text" />
