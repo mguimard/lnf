@@ -1,4 +1,4 @@
-<p>Temps écoulé : {{ (1000*time()) | durationHumanReadable}}</p>
+<p>Temps écoulé : {{ (1000*game.time()) | durationHumanReadable}}</p>
 
 <p>Scores</p>
 <ul>
@@ -8,15 +8,15 @@
 
 </ul>
 
-<p [style.color]="borderColor">Grille</p>
+<p>Grille</p>
 
 <div>
-    @for (card of grid(); track $index) {
+    @for (card of game.grid(); track $index) {
     <app-card-item [appBorderColor]="borderColor" [card]="card" (click)="reveal(card)"></app-card-item>
     }
 </div>
 
-@if(this.gameOver()){
+@if(this.game.gameOver()){
 <p>Bravo !</p>
 }
 

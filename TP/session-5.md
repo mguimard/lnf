@@ -6,20 +6,15 @@
 - Créer une navigation avec 3 pages
 - Implémenter un formulaire
 
-## Tâches
+## TLDR
 
 - Créer les composants :
   - `pages/game`
   - `pages/settings-form`
-  - `pages/high-scmres`
+  - `pages/high-scores`
 - Configurer `RouterModule`
 - Ajouter un menu (navbar ou boutons de navigation)
 - Sauvegarder les réglages dans un service
-
-## Concepts visés
-
-- Angular Routing : `RouterModule`, `routerLink`, `router-outlet`
-- Services pour partage d’état entre pages
 
 ## Commandes
 

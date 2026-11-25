@@ -12,15 +12,13 @@ export const routes: Routes = [
     //component: Users,
     loadComponent: () => import('./pages/users/users').then((module) => module.Users),
   },
-
   {
     path: 'invoices',
     //component: Invoices,
     loadComponent: () => import('./pages/invoices/invoices').then((module) => module.Invoices),
   },
-  // users/1234
   {
-    path: 'users/:userId',
+    path: 'users/:userId', // users/1234
     //component: UserDetail,
     loadComponent: () =>
       import('./pages/user-detail/user-detail').then((module) => module.UserDetail),

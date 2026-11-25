@@ -18,12 +18,13 @@ describe('SortPipe', () => {
   it('should sort the array', () => {
     const pipe = new SortPipe();
     let sorted = pipe.transform<Pizza>(pizzas, 'price', 'desc');
-    expect(sorted[0].name).toBe('chorizo');
+    expect(sorted).not.toBe(null);
+    expect(sorted![0].name).toBe('chorizo');
   });
 
   it('should not modify the input', () => {
     const pipe = new SortPipe();
-    let sorted = pipe.transform<Pizza>(pizzas, 'price', 'desc');
+    pipe.transform<Pizza>(pizzas, 'price', 'desc');
     expect(pizzas[0].name).toBe('saumon');
   });
 });
