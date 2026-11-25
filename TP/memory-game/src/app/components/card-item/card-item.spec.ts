@@ -12,10 +12,16 @@ describe('CardItem', () => {
 
     fixture = TestBed.createComponent(CardItem);
     component = fixture.componentInstance;
-    await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it('should create', async () => {
+    fixture.componentRef.setInput('card', {
+      logo: 'o',
+      id: 1,
+      revealed: false,
+      matched: false,
+    });
+    await fixture.whenStable();
     expect(component).toBeTruthy();
   });
 });

@@ -2,6 +2,14 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.3.0.
 
+## Docker
+
+```bash
+ng build
+docker build --no-cache -t my-memory-app -f docker/Dockerfile .
+docker run --rm -p 8080:80 -d my-memory-app:latest
+```
+
 ## Development server
 
 To start a local development server, run:

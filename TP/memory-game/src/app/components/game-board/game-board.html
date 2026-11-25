@@ -41,8 +41,8 @@
 
             <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
                 @for (card of game.grid(); track $index) {
-                <app-card-item class="transition-transform duration-200 hover:scale-105" [appBorderColor]="borderColor"
-                    [card]="card" (click)="reveal(card)">
+                <app-card-item data-testid="card-item" class="transition-transform duration-200 hover:scale-105"
+                    [appBorderColor]="borderColor" [card]="card" (click)="reveal(card)">
                 </app-card-item>
                 }
             </div>
