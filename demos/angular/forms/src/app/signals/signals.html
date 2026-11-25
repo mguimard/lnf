@@ -1,0 +1,12 @@
+<p>signals works!</p>
+<form (submit)="onSubmit($event)">
+    <input [formField]="pizzaForm.name" type="text" />
+    <br />
+    <input [formField]="pizzaForm.price" type="number" />
+    <br />
+    @for(i of pizza().ingredients; track $index){
+    <input [formField]="pizzaForm.ingredients[$index]" type="text" />
+    }
+    <button type="button" (click)="addIngredient()">Add ingredient</button>
+    <button type="submit">Submit</button>
+</form>

@@ -1,0 +1,15 @@
+<p>basic works!</p>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <input type="text" placeholder="Enter city" name="city" [(ngModel)]="city" required />
+    <button type="submit" [disabled]="!f.valid">Submit</button>
+</form>
+
+{{ f.valid }}
+
+@if(!f.valid){
+<p>Merci de corriger :</p>
+@if(f.controls['city'].errors){
+- City
+}
+}

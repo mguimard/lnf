@@ -1,0 +1,6 @@
+.ng-invalid::after {
+  content: '* obligatoire';
+}
+.ng-invalid {
+  border: 1px solid red;
+}

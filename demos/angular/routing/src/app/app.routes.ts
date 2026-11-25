@@ -1,4 +1,42 @@
-import { Routes } from '@angular/router';
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  GuardResult,
+  MaybeAsync,
+  RouterStateSnapshot,
+  Routes,
+} from '@angular/router';
+
+const checkToken = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+): MaybeAsync<GuardResult> => {
+  console.log('Check token');
+  return true;
+};
+
+const checkTokenV2 = async (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+): Promise<boolean> => {
+  // pas de CDI
+  // await possible
+  console.log('Check token v2');
+  return Promise.resolve(true);
+};
+
+@Injectable({
+  providedIn: 'root',
+})
+class CheckTokenV3 implements CanActivate {
+  // CDI inject
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
+    console.log(route, state);
+    console.log('CheckToken v3');
+    return true;
+  }
+}
 
 export const routes: Routes = [
   {
@@ -14,6 +52,7 @@ export const routes: Routes = [
   },
   {
     path: 'invoices',
+    canActivate: [checkToken, checkTokenV2, CheckTokenV3],
     //component: Invoices,
     loadComponent: () => import('./pages/invoices/invoices').then((module) => module.Invoices),
   },

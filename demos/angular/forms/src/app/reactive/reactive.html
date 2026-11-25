@@ -1,0 +1,17 @@
+<p>reactive works!</p>
+<form [formGroup]="pizzaForm" (ngSubmit)="onSubmit()">
+
+    <input type="text" formControlName="name" />
+    <br />
+    <input type="number" formControlName="price" />
+    <br />
+
+    <div formArrayName="ingredients">
+        @for(i of pizzaForm.controls['ingredients'].value; track $index){
+        <input type="text" [formControlName]="$index" />
+        }
+    </div>
+
+    <button type="button" (click)="addIngredient()">Add ingredient</button>
+    <button type="submit">Submit</button>
+</form>
