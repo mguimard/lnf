@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { form, FormField, max, min } from '@angular/forms/signals';
+import { form, FormField, max, min, required } from '@angular/forms/signals';
 import { available_logos } from '../../assets/logos';
 import { SettingsService } from '../../services/settings-service';
 
@@ -13,7 +13,8 @@ export class SettingsPage {
   service = inject(SettingsService);
 
   settingsForm = form(this.service.settings, (schema) => {
-    min(schema.pairs, 1);
+    min(schema.pairs, 2);
     max(schema.pairs, available_logos.length);
+    required(schema.borderColor);
   });
 }

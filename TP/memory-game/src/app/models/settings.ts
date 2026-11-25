@@ -7,3 +7,4 @@ export const defaultSettings: Settings = {
   pairs: 8,
   borderColor: 'orange',
 };
+59;

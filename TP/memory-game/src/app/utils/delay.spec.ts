@@ -1,7 +1,7 @@
-import { Delay } from './delay';
+import { delay } from './delay';
 
 describe('Delay', () => {
   it('should create an instance', () => {
-    expect(new Delay()).toBeTruthy();
+    expect(delay).toBeTruthy();
   });
 });

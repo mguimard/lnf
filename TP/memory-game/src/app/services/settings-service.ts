@@ -7,18 +7,9 @@ const storageKey = 'my-settings';
 @Service()
 export class SettingsService {
   storage = inject(LocalStorageService);
-  settings = signal<Settings>(defaultSettings);
+  settings = signal<Settings>(this.storage.read<Settings>(storageKey, defaultSettings));
 
   autoWrite = effect(() => {
     this.storage.write(storageKey, this.settings());
   });
-
-  constructor() {
-    this.load();
-  }
-
-  private load() {
-    let settings = this.storage.read<Settings>(storageKey, defaultSettings);
-    this.settings.set(settings);
-  }
 }
