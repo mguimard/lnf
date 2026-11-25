@@ -1,0 +1,20 @@
+<div class="bg-slate-900 min-h-screen px-4 py-10 text-white">
+    <table class="min-w-full border border-gray-300 divide-y divide-gray-200">
+        <thead class="bg-slate-900">
+            <tr>
+                <th class="px-4 py-3 text-left text-sm font-semibold ">Date</th>
+                <th class="px-4 py-3 text-left text-sm font-semibold ">Name</th>
+                <th class="px-4 py-3 text-left text-sm font-semibold ">Time</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 bg-slate-800">
+            @for (score of scores() | sort:'duration_ms':'asc'; track $index) {
+            <tr class="hover:bg-slate-900">
+                <td class="px-4 py-3 text-sm ">{{ score.timestamp | date}}</td>
+                <td class="px-4 py-3 text-sm ">{{ score.name }}</td>
+                <td class="px-4 py-3 text-sm ">{{ score.duration_ms | durationHumanReadable}} </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

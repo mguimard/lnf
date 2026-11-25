@@ -1,9 +1,12 @@
-import { Service, signal } from '@angular/core';
+import { inject, Service, signal } from '@angular/core';
+import { available_logos } from '../assets/logos';
 import { Card } from '../models/card';
 import { delay } from '../utils/delay';
+import { SettingsService } from './settings-service';
 
 @Service()
 export class Game {
+  settings = inject(SettingsService).settings;
   counterId: number = 0;
 
   grid = signal<Card[]>([]);
@@ -18,19 +21,18 @@ export class Game {
 
   initGrid() {
     const grid: Card[] = [];
-    const logos = ['🚕', '🥝', '🐼', '🎯', '🐱', '🚀', '🎁', '🍎'];
 
-    for (let i = 0; i < logos.length; i++) {
+    for (let i = 0; i < this.settings().pairs; i++) {
       grid.push(
         {
           id: 1 + 2 * i,
-          logo: logos[i],
+          logo: available_logos[i],
           revealed: false,
           matched: false,
         },
         {
           id: 1 + (2 * i + 1),
-          logo: logos[i],
+          logo: available_logos[i],
           revealed: false,
           matched: false,
         },

@@ -1,0 +1,39 @@
+<nav class="border-b border-slate-800 bg-slate-950 px-4 py-4">
+    <div class="mx-auto flex max-w-5xl items-center justify-between">
+
+        <!-- Brand -->
+        <a routerLink="/" class="text-xl font-extrabold tracking-tight text-white">
+            🧠 Memory<span class="text-blue-500">Game</span>
+        </a>
+
+        <!-- Navigation -->
+        <ul class="flex items-center gap-1 rounded-xl bg-slate-900 p-1">
+
+            <li>
+                <a [routerLinkActiveOptions]="{ exact: true }"
+                    routerLinkActive="bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                    class="block rounded-lg px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800 hover:text-white"
+                    routerLink="/">
+                    🎮 <span class="ml-1">Game</span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLinkActive="bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                    class="block rounded-lg px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800 hover:text-white"
+                    routerLink="/scores">
+                    🏆 <span class="ml-1">Scores</span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLinkActive="bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                    class="block rounded-lg px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800 hover:text-white"
+                    routerLink="/settings">
+                    ⚙️ <span class="ml-1">Settings</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>

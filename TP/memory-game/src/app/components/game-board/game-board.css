@@ -1,4 +1,5 @@
 app-card-item {
   cursor: pointer;
   user-select: none;
+  border: 4px solid transparent;
 }

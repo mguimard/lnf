@@ -1,10 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { BorderColor } from '../../directives/border-color';
 import { Card } from '../../models/card';
-import { Score } from '../../models/score';
 import { DurationHumanReadablePipe } from '../../pipes/duration-human-readable-pipe';
 import { Game } from '../../services/game';
 import { ScoresService } from '../../services/scores-service';
+import { SettingsService } from '../../services/settings-service';
 import { CardItem } from '../card-item/card-item';
 
 @Component({
@@ -15,14 +15,14 @@ import { CardItem } from '../card-item/card-item';
 })
 export class GameBoard implements OnInit {
   scoresService = inject(ScoresService);
+  settings = inject(SettingsService).settings;
+
   game = inject(Game);
 
-  scores = signal<Score[]>([]);
-  borderColor = 'orange';
+  borderColor = this.settings().borderColor;
 
   ngOnInit(): void {
     this.game.new();
-    this.loadScores();
   }
 
   restart() {
@@ -34,18 +34,12 @@ export class GameBoard implements OnInit {
 
     if (this.game.gameOver()) {
       await this.addNewScore();
-      await this.loadScores();
     }
   }
 
   async cheat() {
     this.game.revealAll();
     await this.addNewScore();
-    await this.loadScores();
-  }
-
-  private async loadScores() {
-    this.scores.set(await this.scoresService.getScores());
   }
 
   private async addNewScore() {
